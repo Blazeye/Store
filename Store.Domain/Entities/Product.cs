@@ -1,25 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace Store.Domain.Entities
 {
     public class Product
     {
+        [HiddenInput(DisplayValue = false)]
         public int ProductID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter a product name")]
         [MaxLength(100)]
         public string Name { get; set; }
-        [Required]
+
+        [DataType(DataType.MultilineText)]
+        [Required(ErrorMessage = "Please enter a description")]
         [MaxLength(500)]
         public string Description { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please specify a category")]
         [MaxLength(50)]
         public string Category { get; set; }
+        [Required]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Please enter a positive price")]
         public decimal Price { get; set; }
 
     }

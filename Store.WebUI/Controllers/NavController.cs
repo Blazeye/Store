@@ -17,6 +17,7 @@ namespace Store.WebUI.Controllers
         // GET: Nav
         public PartialViewResult Menu(string category = null)
         {
+            // naast null <, bool horizontalLayout = false>
             ViewBag.SelectedCategory = category;
 
             IEnumerable<string> categories = repository.Products
@@ -24,7 +25,9 @@ namespace Store.WebUI.Controllers
                                     .Distinct()
                                     .OrderBy(x => x);
 
-            return PartialView(categories);
+            //string viewName = horizontalLayout ? "MenuHorizontal" : "Menu";
+            return PartialView("FlexMenu", categories);
+            //"FlexMenu" ipv viewName
         }
     }
 }
